@@ -273,11 +273,11 @@ public class CallLogPlugin implements FlutterPlugin, ActivityAware, MethodCallHa
      */
     private boolean hasPermissions(String[] permissions) {
         for (String perm : permissions) {
-            if (PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(ctx, perm)) {
-                return false;
+            if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(ctx, perm)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**

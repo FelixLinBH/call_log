@@ -193,7 +193,9 @@ public class CallLogPlugin implements FlutterPlugin, ActivityAware, MethodCallHa
                 queryLogs(StringUtils.join(predicates, "AND"));
                 break;
             default:
-                result.notImplemented();
+                if (result != null) {
+                    result.notImplemented();
+                }
                 cleanup();
         }
     }
@@ -232,10 +234,14 @@ public class CallLogPlugin implements FlutterPlugin, ActivityAware, MethodCallHa
                 map.put("phoneAccountId", cursor.getString(9));
                 entries.add(map);
             }
-            result.success(entries);
+            if (result != null) {
+                result.success(entries);
+            }
             cleanup();
         } catch (Exception e) {
-            result.error(INTERNAL_ERROR, e.getMessage(), null);
+            if (result != null) {
+                result.error(INTERNAL_ERROR, e.getMessage(), null);
+            }
             cleanup();
         }
     }
